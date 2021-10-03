@@ -4,17 +4,21 @@ function init_joust_pieces()
   pieces[1].y = 70
   pieces[1].dx = 0
   pieces[13].spr_id = 2
-  pieces[13].x = 110
+  pieces[13].x = 120
   pieces[13].y = 70
-  pieces[13].dx = 1/2 
+  pieces[13].dx = 0 
 
 end
 
 function draw_joust()
   rectfill(0,75,127,127, 3)
-
-  spr(pieces[1].spr_id, pieces[1].x, pieces[1].y)
-  spr(pieces[13].spr_id, pieces[13].x, pieces[13].y)
+  
+  spr(pieces[1].spr_id, pieces[1].x % 128, pieces[1].y)
+  
+  if pieces[1].x > 384 then
+    spr(pieces[13].spr_id, pieces[13].x, pieces[13].y)
+    pieces[13].dx = 3 
+  end
 end
 
 function update_joust()
