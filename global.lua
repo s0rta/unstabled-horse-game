@@ -1,14 +1,18 @@
 total_pieces = 24
 
-paused = false
-selected = 1
 pieces = {}
-game_state = "joust"
-prev_game_state = ""
+game_tbl = {
+  state = "joust",
+  prev_state = "",
+  selected = -1,
+  paused = false,
+  clock = 0
+}
 
 function _init()
   piece_num = 1
-
+  palt(14, true)
+  palt(0, false)
   for i=1, total_pieces do
     pieces[piece_num] = {
       x = 0,
@@ -26,16 +30,16 @@ end
 
 function _draw()
   cls()
-  if game_state == "joust" then
+  if game_tbl.state == "joust" then
     draw_joust()
   end
 end
 
 function _update()
-  if game_state == "joust" then
-    if prev_game_state != "joust" then
+  if game_tbl.state == "joust" then
+    if game_tbl.prev_state != "joust" then
       init_joust_pieces()
-      prev_game_state = "joust"
+      game_tbl.prev_state = "joust"
     end
     update_joust()
   end
